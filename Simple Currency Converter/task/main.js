@@ -5,19 +5,23 @@ for (let cur in rate) {
     console.log(`1 USD equals  ${rate[cur]} ${cur}`);
 }
 
-let target = input(`I can convert USD to these currencies: JPY, EUR, RUB, USD, GBP
-Type the currency you wish to convert: USD
-To: `).toUpperCase();
-
-if (Object.keys(rate).includes(target)) {
-    let amount = Number(input('Amount: '));
-    if (Number.isNaN(amount)) {
-        console.log('The amount has to be a number');
-    } else if (amount < 1) {
-        console.log('The amount can not be less than 1');
+console.log('What do you want to convert?');
+let source = input('From: ').toUpperCase();
+if (Object.keys(rate).includes(source)) {
+    let target = input('To: ').toUpperCase();
+    if (Object.keys(rate).includes(target)) {
+        let amount = Number(input('Amount: '));
+        if (Number.isNaN(amount)) {
+            console.log('The amount has to be a number');
+        } else if (amount < 1) {
+            console.log('The amount can not be less than 1');
+        } else {
+            console.log(`Result: ${amount} ${source} equals ${(rate[target] / rate[source] * amount).toFixed(4)} ${target}`);
+        }
     } else {
-        console.log(`Result: ${amount} USD equals ${(rate[target] * amount).toFixed(4)} ${target}`);
+        console.log('Unknown currency');
     }
 } else {
     console.log('Unknown currency');
 }
+
